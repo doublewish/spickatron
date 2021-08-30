@@ -1,1 +1,63 @@
-CHATAPP
+<div id="chatapp">
+  <account-notification-banner></account-notification-banner>
+  <div class="container pt-5 pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <h1>Spickatron Chat Application!</h1>
+        </div>
+        <div class="col-3 pt-4">
+          <%= me.fullName %>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <p>This is a simple chat application for presentation.</p>
+    <div class="container">
+      <div class="chatbox row">
+        <div id="chatwindow" class="col-9 bg-light p-3 border text-dark">Chat Window</div>
+        <div id="userwindow" class="col-3 bg-secondary p-3 border text-white">User Window</div>
+      </div>
+      <div class="chattext row">
+        <input class="col-12 border" type="text" value="" id="sendtext" name="chattext" onkeydown="sendtext()"/>
+      </div>
+    </div>
+  </div>
+  <script>
+    function updateScroll() {
+      var scrollbars = $("#chatwindow")[0]
+      scrollbars.scrollTop = scrollbars.scrollHeight
+    }
+    function sendtext() {
+      if(event.keyCode == 13) {
+        const text = $("#sendtext").val()
+        $("#sendtext").val("")
+        const userid = "<%= me.fullName %>"
+        $.ajax('/chattext/message/' + encodeURIComponent(userid) + '/' + encodeURIComponent(text))
+        // alert('/chattext/' + userid + '/' + text)
+      }
+    }
+    setInterval(() => {
+      jQuery.ajax({dataType: "json", url: '/chattext/getmessagelist', success: (json, status, jqXHR) => {
+        
+        var messages = '<div class="container">'
+        $(json).each((i, message) => {
+          messages += '<div class="row"><div class="col-3">' + message.userid + '</div><div class="col-9">' + message.text + '</div></div>'
+        }) 
+        messages += '</div>'
+        $("#chatwindow").html(messages)
+        updateScroll()
+      }})
+      jQuery.ajax({dataType: "json", url: '/chattext/getuserlist', success: (json, status, jqXHR) => {
+        var users = '<div class="container">'
+        $(json).each((i, user) => {
+          users += '<div class="row">' + user.fullName + '</div>'
+        })
+        users += '</div>'
+        $("#userwindow").html(users)
+
+      }})
+    }, 2000)
+  </script>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

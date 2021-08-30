@@ -1,0 +1,12 @@
+.chatbox {
+  height: 300px;
+}
+
+#chatwindow {
+  overflow: scroll;
+  height: 300px;
+}
+
+#userwindow {
+  overflow: hidden;
+}

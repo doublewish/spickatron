@@ -16,6 +16,10 @@ module.exports.routes = {
   'GET /':                   { action: 'view-homepage-or-redirect' },
   'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
+  'GET /chattext/message/:userid/:text': 'ChattextController.message',
+  'GET /chattext/getmessagelist':        'ChattextController.getmessagelist',
+  'GET /chattext/getuserlist':           'ChattextController.getuserlist',
+  
   'GET /chatapp':            { view: 'pages/chatapp'},
 
   'GET /faq':                { action:   'view-faq' },

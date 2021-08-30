@@ -1,0 +1,19 @@
+{
+  "name": "spickatron",
+  "version": "1.0.0",
+  "description": "Test project for presentation",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doublewish/spickatron.git"
+  },
+  "author": "Brett Grentell",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/doublewish/spickatron/issues"
+  },
+  "homepage": "https://github.com/doublewish/spickatron#readme"
+}

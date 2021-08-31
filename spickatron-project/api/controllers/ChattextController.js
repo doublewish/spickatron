@@ -10,7 +10,6 @@ module.exports = {
   message: function(req, res) {
     const {userid, text} = req.params
 
-    // console.log(req.params.id + " : " + req.params.text)
     Chattext.create({userid, text}).exec((err) => {
       if(err) {
         res.send(500, {error: 'Database Error'})
